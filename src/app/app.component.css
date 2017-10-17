@@ -1,0 +1,21 @@
+button {
+  margin-left: 10px;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav {
+  padding: 20px;
+  /*width: 250px;*/
+  height: 300px;
+}
+
