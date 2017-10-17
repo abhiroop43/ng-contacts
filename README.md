@@ -1,6 +1,6 @@
 # Angular Contacts
 
-An address book app created using Angular and angular-material.
+An address book app created using Angular.
 
 ## Development server
 
