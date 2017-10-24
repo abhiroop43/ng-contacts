@@ -1,10 +1,17 @@
 <mat-list>
-  <mat-list-item *ngFor="let contact of (contactsList | async).contacts">
-    <img matListAvatar [src]="contact.picture.thumbnail" alt="...">
-    <h3 matLine style="text-transform: capitalize"> {{contact.name.first}} {{contact.name.last}} </h3>
-    <p matLine>
-      <span>Email: {{contact.email}} </span>
-      <span class="demo-2">M: {{contact.cell}} </span>
-    </p>
+  <mat-list-item
+  *ngFor="let contact of (contactsList | async).contacts"
+  [routerLink]="['/contacts', contact.id.name]"
+  style="cursor: pointer;">
+
+      <img matListAvatar [src]="contact.picture.thumbnail" alt="...">
+      <h3 matLine style="text-transform: capitalize"> {{contact.name.first}} {{contact.name.last}} </h3>
+      <p matLine>
+        <span>Ph: {{contact.phone}} </span>&nbsp;|&nbsp;
+        <span class="demo-2">M: {{contact.cell}} </span>
+      </p>
   </mat-list-item>
 </mat-list>
+
+<button [routerLink]="['/contacts/new']" mat-raised-button color="primary">Add
+</button>
