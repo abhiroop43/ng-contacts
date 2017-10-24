@@ -1,3 +1,10 @@
-<p>
-  contacts works!
-</p>
+<mat-list>
+  <mat-list-item *ngFor="let contact of (contactsList | async).contacts">
+    <img matListAvatar [src]="contact.picture.thumbnail" alt="...">
+    <h3 matLine style="text-transform: capitalize"> {{contact.name.first}} {{contact.name.last}} </h3>
+    <p matLine>
+      <span>Email: {{contact.email}} </span>
+      <span class="demo-2">M: {{contact.cell}} </span>
+    </p>
+  </mat-list-item>
+</mat-list>

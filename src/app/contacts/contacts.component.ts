@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ContactsService} from './contacts.service';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 import {Contact} from './contact.model';
+import * as fromContacts from './store/contacts.reducer';
+import * as ContactsActions from './store/contacts.action';
 
 @Component({
   selector: 'app-contacts',
@@ -8,11 +12,14 @@ import {Contact} from './contact.model';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  contactsList: Contact[];
-  constructor(private contactsService: ContactsService) { }
+  // contactsList: Observable<{contacts: Contact[]}>;
+  contactsList: Observable<Contact[]>;
+
+  displayedColumns = ['name'];
+  constructor(private store: Store<fromContacts.IContactState>) { }
 
   ngOnInit() {
-    this.contactsList = this.contactsService.getAll();
+    this.contactsList = this.store.select('contacts');
   }
 
 }

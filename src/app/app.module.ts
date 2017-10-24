@@ -7,10 +7,18 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import {HttpModule} from '@angular/http';
-import {ContactsService} from './contacts/contacts.service';
-import {MatButtonModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
-import { HomeComponent } from './home/home.component';
 import {AppRoutingModule} from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { ContactsReducer } from './contacts/store/contacts.reducer';
+import {ContactsService} from './contacts/contacts.service';
+import {
+  MatButtonModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatLineModule
+} from '@angular/material';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +33,12 @@ import {AppRoutingModule} from './app-routing.module';
     BrowserAnimationsModule,
     HttpModule,
     AppRoutingModule,
+    StoreModule.forRoot({contacts: ContactsReducer}),
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatLineModule
   ],
   providers: [ContactsService],
   bootstrap: [AppComponent]
