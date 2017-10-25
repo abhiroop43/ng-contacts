@@ -1,28 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" routerLink="/">Angular Contacts</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          (click)="toggleCollapsed()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<mat-sidenav-container>
-  <mat-toolbar color="primary">
-    <span>Angular Contacts</span>
-    <button type="button" mat-icon-button (click)="sidenav.toggle()">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-    <!-- This fills the remaining space of the current row -->
-    <span class="fill-remaining-space"></span>
-
-    <!--<span>Right Aligned Text</span>-->
-  </mat-toolbar>
-  <mat-sidenav mode="over" #sidenav class="sidenav">
-    <mat-list>
-      <mat-list-item>
-        <a mat-button [routerLink]="['/home']" (click)="sidenav.close()">Home</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a mat-button [routerLink]="['/contacts']" (click)="sidenav.close()">Contacts</a>
-      </mat-list-item>
-    </mat-list>
-  </mat-sidenav>
-
-  <div class="sidenav-content">
-    <router-outlet></router-outlet>
+  <div [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/home" (click)="collapsed = true;">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/contacts" (click)="collapsed = true;">Contacts</a>
+      </li>
+    </ul>
   </div>
-
-</mat-sidenav-container>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,17 +1,33 @@
-<mat-list>
-  <mat-list-item
-  *ngFor="let contact of (contactsList | async).contacts"
-  [routerLink]="['/contacts', contact.id.name]"
-  style="cursor: pointer;">
-
-      <img matListAvatar [src]="contact.picture.thumbnail" alt="...">
-      <h3 matLine style="text-transform: capitalize"> {{contact.name.first}} {{contact.name.last}} </h3>
-      <p matLine>
-        <span>Ph: {{contact.phone}} </span>&nbsp;|&nbsp;
-        <span class="demo-2">M: {{contact.cell}} </span>
-      </p>
-  </mat-list-item>
-</mat-list>
-
-<button [routerLink]="['/contacts/new']" mat-raised-button color="primary">Add
-</button>
+<!--<div class="row">-->
+  <!--<div class="col-md-12">-->
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+      <tr>
+        <th> Photo </th>
+        <th> Name </th>
+        <th> Phone </th>
+        <th> Cell </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let contact of (contactsList | async).contacts">
+        <td>
+          <img matListAvatar [src]="contact.picture.thumbnail" alt="...">
+        </td>
+        <td>
+          {{contact.name.first}} {{contact.name.last}}
+        </td>
+        <td>{{contact.phone}}</td>
+        <td>{{contact.cell}}</td>
+      </tr>
+      </tbody>
+    </table>
+  <!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+  <!--<div class="col-xs-12">-->
+    <button [routerLink]="['/contacts/new']" class="btn btn-primary">
+      <i class="fa fa-plus"></i> Add
+    </button>
+  <!--</div>-->
+<!--</div>-->

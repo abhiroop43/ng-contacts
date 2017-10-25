@@ -1,3 +1,46 @@
-<p>
-  contact-edit works!
-</p>
+<!--<div class="row">-->
+  <!--<div class="col-md-12">-->
+    <form [formGroup]="contactEditForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="contactTitle">Title</label>
+        <input type="email" class="form-control" formControlName="title"
+               id="contactTitle" placeholder="Mr.">
+      </div>
+      <div class="form-group">
+        <label for="contactFirstName">First Name</label>
+        <input type="email" class="form-control" formControlName="firstname"
+               id="contactFirstName" placeholder="John">
+      </div>
+      <div class="form-group">
+        <label for="contactLastName">Last Name</label>
+        <input type="email" class="form-control" formControlName="lastname"
+               id="contactLastName" placeholder="Smith">
+      </div>
+      <div class="form-group">
+        <label for="contactPhoneNo">Phone No.</label>
+        <input type="email" class="form-control" formControlName="phone"
+               id="contactPhoneNo" placeholder="046987712">
+      </div>
+      <div class="form-group">
+        <label for="contactCellNo">Cell No.</label>
+        <input type="email" class="form-control" formControlName="cell"
+               id="contactCellNo" placeholder="0501126697">
+      </div>
+      <div class="form-group">
+        <label for="contactEmail">Email Address</label>
+        <input type="email" class="form-control" formControlName="email"
+               id="contactEmail" placeholder="john.smith@example.com">
+      </div>
+      <div class="form-group">
+        <label for="contactPhotoUrl">Photo URL</label>
+        <input type="email" class="form-control" formControlName="photo"
+               id="contactPhotoUrl" placeholder="http://">
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!contactEditForm.valid">Save</button>
+      <button class="btn btn-default" routerLink="['/contacts']">Cancel</button>
+
+    </form>
+  <!--</div>-->
+<!--</div>-->
+
+

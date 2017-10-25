@@ -11,14 +11,9 @@ import {AppRoutingModule} from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { ContactsReducer } from './contacts/store/contacts.reducer';
 import {ContactsService} from './contacts/contacts.service';
-import {
-  MatButtonModule,
-  MatListModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  MatLineModule
-} from '@angular/material';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,12 +28,9 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     HttpModule,
     AppRoutingModule,
-    StoreModule.forRoot({contacts: ContactsReducer}),
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatListModule,
-    MatLineModule
+    ReactiveFormsModule,
+    NgbModule.forRoot(),
+    StoreModule.forRoot({contacts: ContactsReducer})
   ],
   providers: [ContactsService],
   bootstrap: [AppComponent]
