@@ -11,9 +11,9 @@ import {AppRoutingModule} from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { ContactsReducer } from './contacts/store/contacts.reducer';
 import {ContactsService} from './contacts/contacts.service';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ButtonModule, DataListModule, InputTextModule, PanelModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -29,8 +29,11 @@ import {ReactiveFormsModule} from '@angular/forms';
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
-    StoreModule.forRoot({contacts: ContactsReducer})
+    StoreModule.forRoot({contacts: ContactsReducer}),
+    PanelModule,
+    InputTextModule,
+    ButtonModule,
+    DataListModule
   ],
   providers: [ContactsService],
   bootstrap: [AppComponent]
