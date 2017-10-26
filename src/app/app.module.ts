@@ -14,6 +14,8 @@ import {ContactsService} from './contacts/contacts.service';
 import { HomeComponent } from './home/home.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule, DataListModule, InputTextModule, PanelModule} from 'primeng/primeng';
+import {EffectsModule} from '@ngrx/effects';
+import {ContactsEffects} from './contacts/store/contacts.effects';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import {ButtonModule, DataListModule, InputTextModule, PanelModule} from 'primen
     AppRoutingModule,
     ReactiveFormsModule,
     StoreModule.forRoot({contacts: ContactsReducer}),
+    EffectsModule.forRoot([ContactsEffects]),
     PanelModule,
     InputTextModule,
     ButtonModule,

@@ -1,14 +1,14 @@
 <p-dataList [value]="(contactsList | async).contacts">
   <p-header>List of Contacts</p-header>
   <ng-template let-contact pTemplate="item">
-    <div class="ui-g ui-fluid">
-      <div class="ui-g-12 ui-md-3 text-center">
-        <img class="img-thumbnail" [src]="contact.picture.large" alt="...">
+    <div class="ui-g ui-fluid" [routerLink]="['/contacts', contact.id]">
+      <div class="ui-g-12 ui-md-3 text-center" style="cursor: pointer;">
+        <img class="img-thumbnail" [src]="contact.photo" alt="...">
       </div>
       <div class="ui-g-12 ui-md-9">
         <div class="ui-g">
           <div class="ui-g-2 ui-sm-6">Name:</div>
-          <div class="ui-g-10 ui-sm-6">{{contact.name.first}} {{contact.name.last}}</div>
+          <div class="ui-g-10 ui-sm-6">{{contact.firstname}} {{contact.lastname}}</div>
           <div class="ui-g-2 ui-sm-6">Phone:</div>
           <div class="ui-g-10 ui-sm-6">{{contact.phone}}</div>
           <div class="ui-g-2 ui-sm-6">Cell:</div>

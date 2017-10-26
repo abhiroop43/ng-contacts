@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import 'rxjs/add/operator/take';
+import * as fromContacts from '../store/contacts.reducer';
+import * as ContactsActions from '../store/contacts.action';
+import {Contact} from '../contact.model';
 
 @Component({
   selector: 'app-contact-edit',
@@ -9,14 +14,25 @@ import {Router} from '@angular/router';
 })
 export class ContactEditComponent implements OnInit {
   contactEditForm: FormGroup;
-  constructor(private router: Router) { }
+  id: number;
+  editMode = false;
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private store: Store<fromContacts.IContactState>) { }
 
   ngOnInit() {
-    this.initForm();
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.editMode = params['id'] != null;
+        this.initForm();
+      }
+    );
   }
 
   onSubmit() {
     console.log(this.contactEditForm.value);
+    this.store.dispatch(new ContactsActions.AddContact(this.contactEditForm.value));
   }
 
   onCancel() {
@@ -24,13 +40,29 @@ export class ContactEditComponent implements OnInit {
   }
 
   private initForm() {
-    const title = '';
-    const firstname = '';
-    const lastname = '';
-    const phone = '';
-    const cell = '';
-    const email = '';
-    const photo = '';
+    let title = '';
+    let firstname = '';
+    let lastname = '';
+    let phone = '';
+    let cell = '';
+    let email = '';
+    let photo = '';
+    if (this.editMode) {
+      this.store.select('contacts')
+        .take(1)
+        .subscribe(
+          (contacts: Contact[]) => {
+            const foundContact = contacts[this.id];
+            title = foundContact.title;
+            firstname = foundContact.firstname;
+            lastname = foundContact.lastname;
+            phone = foundContact.phone;
+            cell = foundContact.cell;
+            email = foundContact.email;
+            photo = foundContact.photo;
+          }
+        );
+    }
     this.contactEditForm = new FormGroup(
       {
         'title': new FormControl(title, [Validators.maxLength(5)]),

@@ -10,11 +10,9 @@ const initialState: IContactState = {
   contacts: [
     {
       gender: 'female',
-      name: {
-        title: 'mrs',
-        first: 'michelle',
-        last: 'watkins'
-      },
+      title: 'mrs',
+      firstname: 'michelle',
+      lastname: 'watkins',
       location: {
         street: '7588 the green',
         city: 'winchester',
@@ -25,14 +23,8 @@ const initialState: IContactState = {
       dob: '1987-02-23 12:29:27',
       phone: '0181 003 7464',
       cell: '0724-984-228',
-      id: {
-        name: 'NINO'
-      },
-      picture: {
-        large: 'https://randomuser.me/api/portraits/women/32.jpg',
-        medium: 'https://randomuser.me/api/portraits/med/women/32.jpg',
-        thumbnail: 'https://randomuser.me/api/portraits/thumb/women/32.jpg'
-      },
+      id: 1,
+      photo: 'https://randomuser.me/api/portraits/women/32.jpg',
       nat: 'GB'
     }
   ]
