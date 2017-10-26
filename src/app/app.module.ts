@@ -16,6 +16,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule, DataListModule, InputTextModule, PanelModule} from 'primeng/primeng';
 import {EffectsModule} from '@ngrx/effects';
 import {ContactsEffects} from './contacts/store/contacts.effects';
+import {HttpClientModule} from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import {ContactsEffects} from './contacts/store/contacts.effects';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     StoreModule.forRoot({contacts: ContactsReducer}),
@@ -36,7 +40,8 @@ import {ContactsEffects} from './contacts/store/contacts.effects';
     PanelModule,
     InputTextModule,
     ButtonModule,
-    DataListModule
+    DataListModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [ContactsService],
   bootstrap: [AppComponent]

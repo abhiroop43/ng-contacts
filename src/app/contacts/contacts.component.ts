@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import {Contact} from './contact.model';
 import * as fromContacts from './store/contacts.reducer';
+import * as ContactActions from './store/contacts.action';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,11 +16,20 @@ export class ContactsComponent implements OnInit {
   constructor(private store: Store<fromContacts.IContactState>, private router: Router) { }
 
   ngOnInit() {
+    // this.store.dispatch(new ContactActions.FetchContacts());
     this.contactsList = this.store.select('contacts');
   }
 
   onAdd() {
     this.router.navigate(['/contacts/new']);
+  }
+
+  storeData() {
+    this.store.dispatch(new ContactActions.StoreContacts());
+  }
+
+  getData() {
+    this.store.dispatch(new ContactActions.FetchContacts());
   }
 
 }
