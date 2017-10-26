@@ -10,7 +10,6 @@ import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { ContactsReducer } from './contacts/store/contacts.reducer';
-import {ContactsService} from './contacts/contacts.service';
 import { HomeComponent } from './home/home.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule, DataListModule, InputTextModule, PanelModule} from 'primeng/primeng';
@@ -43,7 +42,7 @@ import { environment } from '../environments/environment';
     DataListModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [ContactsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

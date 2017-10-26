@@ -9,7 +9,7 @@ import * as fromContacts from './contacts.reducer';
 import * as ContactsActions from './contacts.action';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Contact} from '../contact.model';
-import {Action, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 
 @Injectable()
 export class ContactsEffects {
@@ -30,25 +30,16 @@ export class ContactsEffects {
     .map(
       (contacts) => {
         console.log('Contacts received from firebase', contacts);
-        // return {
-        //   type: ContactsActions.SET_CONTACTS,
-        //   payload: contacts
-        // };
-        return new ContactsActions.SetContacts(contacts) as Action;
+        return {
+          type: ContactsActions.SET_CONTACTS,
+          payload: contacts
+        };
       }
     );
 
   @Effect({dispatch: false})
   contactAdd = this.actions
     .ofType(ContactsActions.ADD_CONTACT)
-    // .switchMap(
-    //   (action: ContactsActions.AddContact) => {
-    //     const req = new HttpRequest('POST',
-    //       'https://ng-contacts-d6378.firebaseio.com/contacts.json',
-    //       action.payload, {reportProgress: true});
-    //     return this.httpClient.request(req);
-    //   }
-    // )
     .do(
       () => {
         this.router.navigate(['/contacts']);
