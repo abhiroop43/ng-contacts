@@ -6,6 +6,8 @@ import 'rxjs/add/operator/take';
 import * as fromContacts from '../store/contacts.reducer';
 import * as ContactsActions from '../store/contacts.action';
 import {Contact} from '../contact.model';
+import {INationality, NationalityService} from './nationality.service';
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-contact-edit',
@@ -16,11 +18,20 @@ export class ContactEditComponent implements OnInit {
   contactEditForm: FormGroup;
   id: number;
   editMode = false;
+  nationalities: INationality[];
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private store: Store<fromContacts.IContactState>) { }
+              private store: Store<fromContacts.IContactState>,
+              private nationalityService: NationalityService) { }
 
   ngOnInit() {
+    this.nationalityService.getNationalities().subscribe(
+      (res) => {
+        // console.log(res);
+        this.nationalities = res;
+        console.log('nationalities received', this.nationalities);
+      }
+    );
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
@@ -51,7 +62,7 @@ export class ContactEditComponent implements OnInit {
     let email = '';
     let photo = '';
     let dob = '';
-    let location = {
+    const location = {
       street: '',
       city: '',
       state: '',

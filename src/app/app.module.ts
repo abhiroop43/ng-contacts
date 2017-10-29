@@ -25,6 +25,7 @@ import {ContactsEffects} from './contacts/store/contacts.effects';
 import {HttpClientModule} from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import {NationalityService} from './contacts/contact-edit/nationality.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { environment } from '../environments/environment';
     RadioButtonModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [],
+  providers: [NationalityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
