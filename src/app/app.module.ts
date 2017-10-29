@@ -12,7 +12,14 @@ import { StoreModule } from '@ngrx/store';
 import { ContactsReducer } from './contacts/store/contacts.reducer';
 import { HomeComponent } from './home/home.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {ButtonModule, DataListModule, InputTextModule, PanelModule} from 'primeng/primeng';
+import {
+  ButtonModule,
+  CalendarModule,
+  DataListModule,
+  InputTextModule,
+  PanelModule,
+  RadioButtonModule
+} from 'primeng/primeng';
 import {EffectsModule} from '@ngrx/effects';
 import {ContactsEffects} from './contacts/store/contacts.effects';
 import {HttpClientModule} from '@angular/common/http';
@@ -40,6 +47,8 @@ import { environment } from '../environments/environment';
     InputTextModule,
     ButtonModule,
     DataListModule,
+    CalendarModule,
+    RadioButtonModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],

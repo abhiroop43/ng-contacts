@@ -31,6 +31,9 @@ export class ContactEditComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.contactEditForm.value['photo'] === '') {
+      this.contactEditForm.value['photo'] = 'https://www.velvetjobs.com/assets/noavatar-profile.jpg';
+    }
     console.log(this.contactEditForm.value);
     this.store.dispatch(new ContactsActions.AddContact(this.contactEditForm.value));
   }
@@ -47,6 +50,14 @@ export class ContactEditComponent implements OnInit {
     let cell = '';
     let email = '';
     let photo = '';
+    let dob = '';
+    let location = {
+      street: '',
+      city: '',
+      state: '',
+      postcode: ''
+    };
+    let gender = 'male';
     if (this.editMode) {
       this.store.select('contacts')
         .take(1)
@@ -60,6 +71,12 @@ export class ContactEditComponent implements OnInit {
             cell = foundContact.cell;
             email = foundContact.email;
             photo = foundContact.photo;
+            dob = foundContact.dob;
+            location.street = foundContact.location.street;
+            location.city = foundContact.location.city;
+            location.state = foundContact.location.state;
+            location.postcode = foundContact.location.postcode;
+            gender = foundContact.gender;
           }
         );
     }
@@ -77,7 +94,17 @@ export class ContactEditComponent implements OnInit {
         'email': new FormControl(email, Validators.email),
         'photo': new FormControl(photo,
           Validators
-            .pattern(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/))
+            .pattern(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/)),
+        'dob': new FormControl(dob),
+        'location': new FormGroup(
+          {
+            'street': new FormControl(location.street),
+            'city': new FormControl(location.city),
+            'state': new FormControl(location.state),
+            'postcode': new FormControl(location.postcode)
+          }
+        ),
+        'gender': new FormControl(gender)
       }
     );
   }

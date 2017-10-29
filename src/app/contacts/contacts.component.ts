@@ -28,8 +28,8 @@ export class ContactsComponent implements OnInit {
     this.store.dispatch(new ContactActions.StoreContacts());
   }
 
-  getData() {
-    this.store.dispatch(new ContactActions.FetchContacts());
-  }
+  // getData() {
+  //   this.store.dispatch(new ContactActions.FetchContacts());
+  // }
 
 }
