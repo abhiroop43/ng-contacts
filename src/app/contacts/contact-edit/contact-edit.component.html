@@ -32,6 +32,16 @@
                id="contactEmail" placeholder="john.smith@example.com">
       </div>
       <div class="ui-g-12 ui-md-6 ui-lg-6">
+        <label for="nat">Nationality</label><br>
+        <p-autoComplete
+         formControlName="nat"
+          [suggestions]="filterednationalities"
+           (completeMethod)="searchNationality($event)"
+           [dropdown]="true"
+           forceSelection="true"
+           field="countryName"></p-autoComplete>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-6">
         <label for="contactPhotoUrl">Photo URL</label>
         <input type="text" pInputText class="form-control" formControlName="photo"
                id="contactPhotoUrl" placeholder="http://" #contactPhotoUrl>

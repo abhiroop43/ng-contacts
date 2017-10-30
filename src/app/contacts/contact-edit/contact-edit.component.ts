@@ -19,6 +19,7 @@ export class ContactEditComponent implements OnInit {
   id: number;
   editMode = false;
   nationalities: INationality[];
+  filterednationalities: INationality[];
   constructor(private route: ActivatedRoute,
               private router: Router,
               private store: Store<fromContacts.IContactState>,
@@ -29,6 +30,7 @@ export class ContactEditComponent implements OnInit {
       (res) => {
         // console.log(res);
         this.nationalities = res;
+        this.filterednationalities = res;
         console.log('nationalities received', this.nationalities);
       }
     );
@@ -39,6 +41,14 @@ export class ContactEditComponent implements OnInit {
         this.initForm();
       }
     );
+  }
+
+  searchNationality(event) {
+    // console.log(event.query);
+    this.filterednationalities = this.nationalities.filter(
+      (el: INationality) => el.countryName.toLowerCase().includes(event.query.toLowerCase())
+    );
+    // console.log('Filtered nationalities', this.filterednationalities);
   }
 
   onSubmit() {
@@ -69,6 +79,7 @@ export class ContactEditComponent implements OnInit {
       postcode: ''
     };
     let gender = 'male';
+    let nat = {};
     if (this.editMode) {
       this.store.select('contacts')
         .take(1)
@@ -88,6 +99,7 @@ export class ContactEditComponent implements OnInit {
             location.state = foundContact.location.state;
             location.postcode = foundContact.location.postcode;
             gender = foundContact.gender;
+            nat = foundContact.nat;
           }
         );
     }
@@ -115,7 +127,8 @@ export class ContactEditComponent implements OnInit {
             'postcode': new FormControl(location.postcode)
           }
         ),
-        'gender': new FormControl(gender)
+        'gender': new FormControl(gender),
+        'nat': new FormControl(nat)
       }
     );
   }

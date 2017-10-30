@@ -30,9 +30,14 @@ export class ContactsEffects {
     .map(
       (contacts) => {
         console.log('Contacts received from firebase', contacts);
+        if (contacts != null) {
+          return {
+            type: ContactsActions.SET_CONTACTS,
+            payload: contacts
+          };
+        }
         return {
-          type: ContactsActions.SET_CONTACTS,
-          payload: contacts
+          type: ContactsActions.GET_CONTACTS
         };
       }
     );

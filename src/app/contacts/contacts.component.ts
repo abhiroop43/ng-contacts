@@ -16,8 +16,8 @@ export class ContactsComponent implements OnInit {
   constructor(private store: Store<fromContacts.IContactState>, private router: Router) { }
 
   ngOnInit() {
-    // this.store.dispatch(new ContactActions.FetchContacts());
     this.contactsList = this.store.select('contacts');
+    // this.store.dispatch(new ContactActions.FetchContacts());
   }
 
   onAdd() {
@@ -28,8 +28,8 @@ export class ContactsComponent implements OnInit {
     this.store.dispatch(new ContactActions.StoreContacts());
   }
 
-  // getData() {
-  //   this.store.dispatch(new ContactActions.FetchContacts());
-  // }
+  getData() {
+    this.store.dispatch(new ContactActions.FetchContacts());
+  }
 
 }
