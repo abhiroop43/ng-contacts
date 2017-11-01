@@ -19,7 +19,8 @@ import {
   InputTextModule,
   PanelModule,
   RadioButtonModule,
-  AutoCompleteModule
+  AutoCompleteModule,
+  GrowlModule
 } from 'primeng/primeng';
 import {EffectsModule} from '@ngrx/effects';
 import {ContactsEffects} from './contacts/store/contacts.effects';
@@ -52,6 +53,7 @@ import {NationalityService} from './contacts/contact-edit/nationality.service';
     CalendarModule,
     RadioButtonModule,
     AutoCompleteModule,
+    GrowlModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [NationalityService],

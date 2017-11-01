@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/withLatestFrom';
 import * as fromContacts from './contacts.reducer';
 import * as ContactsActions from './contacts.action';
@@ -51,7 +52,7 @@ export class ContactsEffects {
       }
     );
 
-  @Effect({dispatch: false})
+  @Effect()
   contactsStore = this.actions
     .ofType(ContactsActions.STORE_CONTACTS)
     .withLatestFrom(this.store.select('contacts'))
@@ -62,7 +63,24 @@ export class ContactsEffects {
           state['contacts'], {reportProgress: true});
         return this.httpClient.request(req);
       }
-    );
+    )
+    .map(
+      (res) => {
+        if (res.type === 2 && res['status'] === 200) {
+          console.log('Saved to FireBase', res);
+          return {
+            type: ContactsActions.STORE_CONTACTS_SUCCESS,
+          };
+        } else if (res.type === 2 && res['status'] !== 200) {
+          return {
+            type: ContactsActions.STORE_CONTACTS_ERROR,
+          };
+        }
+        return {
+          type: ContactsActions.GET_CONTACTS
+        };
+      }
+    ).share();
 
   constructor(private actions: Actions,
               private router: Router,

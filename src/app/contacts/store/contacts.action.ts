@@ -9,6 +9,8 @@ export const DELETE_CONTACT = 'DELETE_CONTACT';
 export const FETCH_CONTACTS = 'FETCH_CONTACTS';
 export const SET_CONTACTS = 'SET_CONTACTS';
 export const STORE_CONTACTS = 'STORE_CONTACTS';
+export const STORE_CONTACTS_SUCCESS = 'STORE_CONTACTS_SUCCESS';
+export const STORE_CONTACTS_ERROR = 'STORE_CONTACTS_ERROR';
 
 export class GetContacts implements Action {
   readonly type = GET_CONTACTS;
@@ -40,10 +42,22 @@ export class StoreContacts implements Action {
   readonly type = STORE_CONTACTS;
 }
 
+export class StoreContactsSuccess implements Action {
+  readonly type = STORE_CONTACTS_SUCCESS;
+  // constructor(public payload: boolean) {}
+}
+
+export class StoreContactsError implements Action {
+  readonly type = STORE_CONTACTS_ERROR;
+  // constructor(public payload: boolean) {}
+}
+
 export type ContactsActions =
   GetContacts |
   AddContact |
   AddContacts |
   FetchContacts |
   SetContacts |
-  StoreContacts;
+  StoreContacts |
+  StoreContactsSuccess |
+  StoreContactsError;

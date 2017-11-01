@@ -6,7 +6,7 @@ export interface IContactState {
 }
 
 const initialState: IContactState = {
-  contacts: []
+  contacts: [],
 };
 
 export function ContactsReducer(
@@ -25,7 +25,6 @@ export function ContactsReducer(
         contacts: [...state.contacts, ...action.payload]
       };
     case ContactsActions.SET_CONTACTS:
-      console.log(action);
       return {
         ...state,
         contacts: [...action.payload]
