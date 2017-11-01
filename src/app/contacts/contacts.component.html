@@ -1,7 +1,16 @@
 <p-growl [(value)]="msgs"></p-growl>
 <div class="ui-g">
+  <div class="ui-g-12 ui-md-4">
+    <form [formGroup]="contactSearchForm" (ngSubmit)="onSearch()">
+      <div class="ui-inputgroup">
+        <input type="text" pInputText placeholder="Search Contacts" formControlName="searchVal">
+        <button pButton type="submit" icon="fa-search"></button>
+        <button pButton type="button" icon="fa-times" (click)="clearSearch()"></button>
+      </div>
+    </form>
+  </div>
   <div class="ui-g-12 ui-md-12 ui-sm-12">
-    <p-dataList [value]="(contactsList | async).contacts">
+    <p-dataList [value]="contactsList">
       <p-header>List of Contacts</p-header>
       <ng-template let-contact pTemplate="item" let-i="index">
         <div class="ui-g ui-fluid" [routerLink]="['/contacts', i]">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import { Store } from '@ngrx/store';
@@ -8,21 +8,26 @@ import * as ContactActions from './store/contacts.action';
 import {Router} from '@angular/router';
 import {Message} from 'primeng/primeng';
 import {ContactsEffects} from './store/contacts.effects';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
-export class ContactsComponent implements OnInit {
-  contactsList: Observable<Contact[]>;
+export class ContactsComponent implements OnInit, OnDestroy {
+  contactsState: Observable<Contact[]>;
+  contactsList: Contact[];
   msgs: Message[] = [];
+  contactSearchForm: FormGroup;
+  contactSub: Subscription;
   constructor(private store: Store<fromContacts.IContactState>,
               private router: Router,
               private contactsEffects: ContactsEffects) { }
 
   ngOnInit() {
-    this.contactsList = this.store.select('contacts');
+    this.contactsState = this.store.select('contacts');
 
     this.contactsEffects.contactsStore
       .filter(action => action.type === ContactActions.STORE_CONTACTS_SUCCESS)
@@ -44,6 +49,7 @@ export class ContactsComponent implements OnInit {
           detail: 'Failed to save contacts'
         });
       });
+    this.initSearchForm();
   }
 
   onAdd() {
@@ -56,6 +62,38 @@ export class ContactsComponent implements OnInit {
 
   getData() {
     this.store.dispatch(new ContactActions.FetchContacts());
+  }
+
+  initSearchForm() {
+    this.contactSearchForm = new FormGroup({
+      searchVal: new FormControl('', Validators.required)
+    });
+    this.clearSearch();
+  }
+
+  onSearch() {
+    const searchVal = this.contactSearchForm.value['searchVal'];
+
+    if (searchVal) {
+      console.log('Searching for....', searchVal);
+      this.contactsList = this.contactsList
+        .filter(contact =>
+          contact.firstname.toLowerCase().includes(searchVal.toLowerCase()) ||
+          contact.lastname.toLowerCase().includes(searchVal.toLowerCase()));
+    }
+  }
+
+  clearSearch() {
+    this.contactSearchForm.reset();
+    this.contactSub = this.contactsState.subscribe(
+      (contactsState) => {
+        this.contactsList = contactsState['contacts'];
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.contactSub.unsubscribe();
   }
 
 }

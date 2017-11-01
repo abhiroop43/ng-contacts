@@ -44,12 +44,10 @@ export class StoreContacts implements Action {
 
 export class StoreContactsSuccess implements Action {
   readonly type = STORE_CONTACTS_SUCCESS;
-  // constructor(public payload: boolean) {}
 }
 
 export class StoreContactsError implements Action {
   readonly type = STORE_CONTACTS_ERROR;
-  // constructor(public payload: boolean) {}
 }
 
 export type ContactsActions =
