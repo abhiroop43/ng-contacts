@@ -11,6 +11,8 @@ export const SET_CONTACTS = 'SET_CONTACTS';
 export const STORE_CONTACTS = 'STORE_CONTACTS';
 export const STORE_CONTACTS_SUCCESS = 'STORE_CONTACTS_SUCCESS';
 export const STORE_CONTACTS_ERROR = 'STORE_CONTACTS_ERROR';
+export const SEARCH_CONTACTS = 'SEARCH_CONTACTS';
+export const CLEAR_SEARCH_CONTACTS = 'CLEAR_SEARCH_CONTACTS';
 
 export class GetContacts implements Action {
   readonly type = GET_CONTACTS;
@@ -50,6 +52,16 @@ export class StoreContactsError implements Action {
   readonly type = STORE_CONTACTS_ERROR;
 }
 
+export class SearchContacts implements Action {
+  readonly type = SEARCH_CONTACTS;
+
+  constructor(public payload: string) {}
+}
+
+export class ClearSearchContacts implements Action {
+  readonly type = CLEAR_SEARCH_CONTACTS;
+}
+
 export type ContactsActions =
   GetContacts |
   AddContact |
@@ -58,4 +70,6 @@ export type ContactsActions =
   SetContacts |
   StoreContacts |
   StoreContactsSuccess |
-  StoreContactsError;
+  StoreContactsError |
+  SearchContacts |
+  ClearSearchContacts;

@@ -29,6 +29,13 @@ export function ContactsReducer(
         ...state,
         contacts: [...action.payload]
       };
+    case ContactsActions.SEARCH_CONTACTS:
+      return {
+        ...state,
+        contacts: [...(state.contacts
+          .filter(cnt => cnt.firstname.toLowerCase().includes(action.payload) ||
+          cnt.firstname.toLowerCase().includes(action.payload)))]
+      };
     default:
       return state;
   }

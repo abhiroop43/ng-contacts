@@ -82,6 +82,17 @@ export class ContactsEffects {
       }
     ).share();
 
+    @Effect()
+    contactsClearSearch = this.actions
+    .ofType(ContactsActions.CLEAR_SEARCH_CONTACTS)
+    .map(
+      () => {
+        return {
+          type: ContactsActions.FETCH_CONTACTS
+        };
+      }
+    );
+
   constructor(private actions: Actions,
               private router: Router,
               private httpClient: HttpClient,

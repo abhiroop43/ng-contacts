@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import { Store } from '@ngrx/store';
@@ -16,9 +16,8 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
-export class ContactsComponent implements OnInit, OnDestroy {
+export class ContactsComponent implements OnInit {
   contactsState: Observable<Contact[]>;
-  contactsList: Contact[];
   msgs: Message[] = [];
   contactSearchForm: FormGroup;
   contactSub: Subscription;
@@ -68,7 +67,6 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.contactSearchForm = new FormGroup({
       searchVal: new FormControl('', Validators.required)
     });
-    this.clearSearch();
   }
 
   onSearch() {
@@ -76,24 +74,13 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
     if (searchVal) {
       console.log('Searching for....', searchVal);
-      this.contactsList = this.contactsList
-        .filter(contact =>
-          contact.firstname.toLowerCase().includes(searchVal.toLowerCase()) ||
-          contact.lastname.toLowerCase().includes(searchVal.toLowerCase()));
+      this.store.dispatch(new ContactActions.SearchContacts(searchVal));
     }
   }
 
   clearSearch() {
     this.contactSearchForm.reset();
-    this.contactSub = this.contactsState.subscribe(
-      (contactsState) => {
-        this.contactsList = contactsState['contacts'];
-      }
-    );
-  }
-
-  ngOnDestroy() {
-    this.contactSub.unsubscribe();
+    this.store.dispatch(new ContactActions.ClearSearchContacts());
   }
 
 }

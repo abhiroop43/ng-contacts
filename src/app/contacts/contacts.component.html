@@ -1,16 +1,16 @@
 <p-growl [(value)]="msgs"></p-growl>
 <div class="ui-g">
-  <div class="ui-g-12 ui-md-4">
+  <div class="ui-g-12 ui-md-12 ui-sm-12">
     <form [formGroup]="contactSearchForm" (ngSubmit)="onSearch()">
       <div class="ui-inputgroup">
-        <input type="text" pInputText placeholder="Search Contacts" formControlName="searchVal">
+        <input type="text" pInputText class="form-control" placeholder="Search Contacts" formControlName="searchVal">
         <button pButton type="submit" icon="fa-search"></button>
-        <button pButton type="button" icon="fa-times" (click)="clearSearch()"></button>
+        <button pButton type="button" icon="fa-times" class="ui-button-danger" (click)="clearSearch()"></button>
       </div>
     </form>
   </div>
   <div class="ui-g-12 ui-md-12 ui-sm-12">
-    <p-dataList [value]="contactsList">
+    <p-dataList [value]="(contactsState | async).contacts">
       <p-header>List of Contacts</p-header>
       <ng-template let-contact pTemplate="item" let-i="index">
         <div class="ui-g ui-fluid" [routerLink]="['/contacts', i]">
@@ -31,23 +31,12 @@
       </ng-template>
     </p-dataList>
 
-    <button
-      pButton
-      icon="fa-plus"
-      iconPos="left"
-      (click)="onAdd()"
-      label="Add"></button>
+    <div style="margin: 10px 0;">
+      <button pButton icon="fa-plus" iconPos="left" (click)="onAdd()" label="Add"></button>
 
-    <button
-      pButton
-      (click)="storeData()"
-      class="ui-button-success"
-      label="Save Contacts"></button>
+      <button pButton (click)="storeData()" class="ui-button-success" label="Save Contacts"></button>
 
-    <button
-    pButton
-    (click)="getData()"
-    class="ui-button-danger"
-    label="Get Contacts"></button>
+      <button pButton (click)="getData()" class="ui-button-danger" label="Get Contacts"></button>
+    </div>
   </div>
 </div>
