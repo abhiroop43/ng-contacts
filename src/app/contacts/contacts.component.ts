@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import { Store } from '@ngrx/store';
@@ -16,11 +16,13 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
-export class ContactsComponent implements OnInit {
+export class ContactsComponent implements OnInit, OnDestroy {
   contactsState: Observable<Contact[]>;
   msgs: Message[] = [];
   contactSearchForm: FormGroup;
-  contactSub: Subscription;
+  contactsStoreSuccessSub: Subscription;
+  contactsStoreErrorSub: Subscription;
+
   constructor(private store: Store<fromContacts.IContactState>,
               private router: Router,
               private contactsEffects: ContactsEffects) { }
@@ -28,7 +30,7 @@ export class ContactsComponent implements OnInit {
   ngOnInit() {
     this.contactsState = this.store.select('contacts');
 
-    this.contactsEffects.contactsStore
+    this.contactsStoreSuccessSub = this.contactsEffects.contactsStore
       .filter(action => action.type === ContactActions.STORE_CONTACTS_SUCCESS)
       .subscribe(() => {
         this.msgs = [];
@@ -38,7 +40,7 @@ export class ContactsComponent implements OnInit {
           detail: 'Contacts saved successfully'
         });
       });
-    this.contactsEffects.contactsStore
+    this.contactsStoreErrorSub = this.contactsEffects.contactsStore
       .filter(action => action.type === ContactActions.STORE_CONTACTS_ERROR)
       .subscribe(() => {
         this.msgs = [];
@@ -81,6 +83,11 @@ export class ContactsComponent implements OnInit {
   clearSearch() {
     this.contactSearchForm.reset();
     this.store.dispatch(new ContactActions.ClearSearchContacts());
+  }
+
+  ngOnDestroy() {
+    this.contactsStoreSuccessSub.unsubscribe();
+    this.contactsStoreErrorSub.unsubscribe();
   }
 
 }
