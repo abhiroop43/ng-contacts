@@ -30,7 +30,7 @@ export class ContactDetailComponent implements OnInit {
         this.contactsState = this.store.select('contacts');
         this.bindData();
       }
-    )
+    );
   }
 
   bindData() {
@@ -49,6 +49,7 @@ export class ContactDetailComponent implements OnInit {
       message: 'Are you sure that you want to delete this contact?',
       accept: () => {
         console.log('delete contact confirmed');
+        this.store.dispatch(new ContactsActions.DeleteContact(this.id));
         this.router.navigate(['/contacts']);
       }
     });

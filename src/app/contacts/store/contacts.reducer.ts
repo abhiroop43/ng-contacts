@@ -36,6 +36,13 @@ export function ContactsReducer(
           .filter(cnt => cnt.firstname.toLowerCase().includes(action.payload) ||
           cnt.firstname.toLowerCase().includes(action.payload)))]
       };
+    case ContactsActions.DELETE_CONTACT:
+      const oldContacts = state.contacts;
+      const deletedContact = state.contacts.splice(action.payload, 1);
+      return {
+        ...state,
+        contacts: [...(oldContacts)]
+      };
     default:
       return state;
   }

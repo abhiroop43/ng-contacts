@@ -62,6 +62,12 @@ export class ClearSearchContacts implements Action {
   readonly type = CLEAR_SEARCH_CONTACTS;
 }
 
+export class DeleteContact implements Action {
+  readonly type = DELETE_CONTACT;
+
+  constructor(public payload: number) {}
+}
+
 export type ContactsActions =
   GetContacts |
   AddContact |
@@ -72,4 +78,5 @@ export type ContactsActions =
   StoreContactsSuccess |
   StoreContactsError |
   SearchContacts |
-  ClearSearchContacts;
+  ClearSearchContacts |
+  DeleteContact;
