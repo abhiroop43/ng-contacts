@@ -20,7 +20,9 @@ import {
   PanelModule,
   RadioButtonModule,
   AutoCompleteModule,
-  GrowlModule
+  GrowlModule,
+  ConfirmDialogModule,
+  ConfirmationService
 } from 'primeng/primeng';
 import {EffectsModule} from '@ngrx/effects';
 import {ContactsEffects} from './contacts/store/contacts.effects';
@@ -54,9 +56,10 @@ import {NationalityService} from './contacts/contact-edit/nationality.service';
     RadioButtonModule,
     AutoCompleteModule,
     GrowlModule,
+    ConfirmDialogModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [NationalityService],
+  providers: [ConfirmationService, NationalityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
