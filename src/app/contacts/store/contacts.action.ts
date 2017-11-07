@@ -1,5 +1,5 @@
-import { Contact } from '../contact.model';
 import { Action } from '@ngrx/store';
+import { Contact } from '../contact.model';
 
 export const GET_CONTACTS = 'GET_CONTACTS';
 export const ADD_CONTACT = 'ADD_CONTACT';
@@ -62,6 +62,12 @@ export class ClearSearchContacts implements Action {
   readonly type = CLEAR_SEARCH_CONTACTS;
 }
 
+export class UpdateContact implements Action {
+  readonly type = UPDATE_CONTACT;
+
+  constructor(public payload: {index: number, updateContact: Contact}) {}
+}
+
 export class DeleteContact implements Action {
   readonly type = DELETE_CONTACT;
 
@@ -79,4 +85,5 @@ export type ContactsActions =
   StoreContactsError |
   SearchContacts |
   ClearSearchContacts |
+  UpdateContact |
   DeleteContact;

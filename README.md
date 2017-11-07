@@ -14,6 +14,6 @@ Search bar - done
 
 A button that opens a "new contact" form - done
 
-Possibility to edit existing contacts
+Possibility to edit existing contacts - done
 
 Google map integration to select address

@@ -44,6 +44,11 @@ export class ContactDetailComponent implements OnInit {
     );
   }
 
+  editContact() {
+    // this.router.navigate(['/edit'], { relativeTo: this.route });
+    this.router.navigate(['/contacts/' + this.id + '/edit']);
+  }
+
   deleteContact() {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this contact?',

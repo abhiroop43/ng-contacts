@@ -6,7 +6,7 @@ export interface IContactState {
 }
 
 const initialState: IContactState = {
-  contacts: [],
+  contacts: []
 };
 
 export function ContactsReducer(
@@ -32,16 +32,32 @@ export function ContactsReducer(
     case ContactsActions.SEARCH_CONTACTS:
       return {
         ...state,
-        contacts: [...(state.contacts
-          .filter(cnt => cnt.firstname.toLowerCase().includes(action.payload) ||
-          cnt.firstname.toLowerCase().includes(action.payload)))]
+        contacts: [
+          ...state.contacts.filter(
+            cnt =>
+              cnt.firstname.toLowerCase().includes(action.payload) ||
+              cnt.lastname.toLowerCase().includes(action.payload)
+          )
+        ]
+      };
+    case ContactsActions.UPDATE_CONTACT:
+      const oldContact = state.contacts[action.payload.index];
+      const updatedContact = {
+        ...oldContact,
+        ...action.payload.updateContact
+      };
+      const contacts = [...state.contacts];
+      contacts[action.payload.index] = updatedContact;
+      return {
+        ...state,
+        contacts: [...contacts]
       };
     case ContactsActions.DELETE_CONTACT:
       const oldContacts = state.contacts;
       const deletedContact = state.contacts.splice(action.payload, 1);
       return {
         ...state,
-        contacts: [...(oldContacts)]
+        contacts: [...oldContacts]
       };
     default:
       return state;

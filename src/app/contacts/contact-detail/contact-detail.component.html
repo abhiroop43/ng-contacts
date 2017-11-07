@@ -23,7 +23,7 @@
     <div>
       <label>Nationality:</label>{{contact.nat}}</div>
     <div>
-      <button pButton label="Edit"></button>
+      <button pButton label="Edit" (click)="editContact()"></button>
       <button pButton class="ui-button-danger" label="Delete" (click)="deleteContact()"></button>
     </div>
   </div>
