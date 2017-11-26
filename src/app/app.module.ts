@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -30,6 +30,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import {NationalityService} from './contacts/contact-edit/nationality.service';
+import {RollbarErrorHandler, rollbarFactory, RollbarService} from "./shared/RollbarErrorHandler";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,9 @@ import {NationalityService} from './contacts/contact-edit/nationality.service';
     ConfirmDialogModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [ConfirmationService, NationalityService],
+  providers: [ConfirmationService, NationalityService,
+    { provide: ErrorHandler, useClass: RollbarErrorHandler },
+    { provide: RollbarService, useFactory: rollbarFactory }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
