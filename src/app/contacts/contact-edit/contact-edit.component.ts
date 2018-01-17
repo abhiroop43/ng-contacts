@@ -20,12 +20,14 @@ export class ContactEditComponent implements OnInit {
   editMode = false;
   nationalities: INationality[];
   filterednationalities: INationality[];
+  mapBaseUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCLuBpYlUbul4swJ4ayjuf1WNcweZC-0xw&q=';
+  mapUrl;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<fromContacts.IContactState>,
     private nationalityService: NationalityService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.nationalityService.getNationalities().subscribe(res => {
@@ -142,5 +144,10 @@ export class ContactEditComponent implements OnInit {
       gender: new FormControl(gender),
       nat: new FormControl(nat)
     });
+    this.mapUrl = `${this.mapBaseUrl}
+    ${this.contactEditForm.value.location.street}
+    +${this.contactEditForm.value.location.postcode}
+    +${this.contactEditForm.value.location.city}
+    +${this.contactEditForm.value.location.state}`;
   }
 }

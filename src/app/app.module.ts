@@ -2,16 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
-import {HttpModule} from '@angular/http';
-import {AppRoutingModule} from './app-routing.module';
+import { HttpModule } from '@angular/http';
+import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { ContactsReducer } from './contacts/store/contacts.reducer';
 import { HomeComponent } from './home/home.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   ButtonModule,
   CalendarModule,
@@ -24,13 +24,14 @@ import {
   ConfirmDialogModule,
   ConfirmationService
 } from 'primeng/primeng';
-import {EffectsModule} from '@ngrx/effects';
-import {ContactsEffects} from './contacts/store/contacts.effects';
-import {HttpClientModule} from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactsEffects } from './contacts/store/contacts.effects';
+import { SafePipe } from './shared/safe.pipe';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import {NationalityService} from './contacts/contact-edit/nationality.service';
-import {RollbarErrorHandler, rollbarFactory, RollbarService} from "./shared/RollbarErrorHandler";
+import { NationalityService } from './contacts/contact-edit/nationality.service';
+import { RollbarErrorHandler, rollbarFactory, RollbarService } from "./shared/RollbarErrorHandler";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {RollbarErrorHandler, rollbarFactory, RollbarService} from "./shared/Roll
     ContactsComponent,
     ContactDetailComponent,
     ContactEditComponent,
-    HomeComponent
+    HomeComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,7 @@ import {RollbarErrorHandler, rollbarFactory, RollbarService} from "./shared/Roll
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({contacts: ContactsReducer}),
+    StoreModule.forRoot({ contacts: ContactsReducer }),
     EffectsModule.forRoot([ContactsEffects]),
     PanelModule,
     InputTextModule,

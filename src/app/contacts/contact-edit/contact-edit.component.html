@@ -1,107 +1,109 @@
 <!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-    <form [formGroup]="contactEditForm" (ngSubmit)="onSubmit()">
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactTitle">Title</label>
-        <input type="text" pInputText class="form-control" formControlName="title"
-               id="contactTitle" placeholder="Mr.">
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactFirstName">First Name <span style="color: red">*</span></label>
-        <input type="text" pInputText class="form-control" formControlName="firstname"
-               id="contactFirstName" placeholder="John">
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactLastName">Last Name <span style="color: red">*</span></label>
-        <input type="text" pInputText class="form-control" formControlName="lastname"
-               id="contactLastName" placeholder="Smith">
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactPhoneNo">Phone No. <span style="color: red">*</span></label>
-        <input type="text" pInputText class="form-control" formControlName="phone"
-               id="contactPhoneNo" placeholder="046987712">
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactCellNo">Cell No. <span style="color: red">*</span></label>
-        <input type="text" pInputText class="form-control" formControlName="cell"
-               id="contactCellNo" placeholder="0501126697">
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactEmail">Email Address <span style="color: red">*</span></label>
-        <input type="text" pInputText class="form-control" formControlName="email"
-               id="contactEmail" placeholder="john.smith@example.com">
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="nat">Nationality</label><br>
-        <p-autoComplete
-         formControlName="nat"
-          [suggestions]="filterednationalities"
-           (completeMethod)="searchNationality($event)"
-           [dropdown]="true"
-           forceSelection="true"
-           field="countryName"></p-autoComplete>
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactPhotoUrl">Photo URL</label>
-        <input type="text" pInputText class="form-control" formControlName="photo"
-               id="contactPhotoUrl" placeholder="http://" #contactPhotoUrl>
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6" *ngIf="contactPhotoUrl.value">
-        <img class="img-thumbnail"
-             [src]="contactPhotoUrl.value" style="height: 66px;">
-      </div>
+<!--<div class="col-md-12">-->
+<form [formGroup]="contactEditForm" (ngSubmit)="onSubmit()">
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactTitle">Title</label>
+    <input type="text" pInputText class="form-control" formControlName="title" id="contactTitle" placeholder="Mr.">
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactFirstName">First Name
+      <span style="color: red">*</span>
+    </label>
+    <input type="text" pInputText class="form-control" formControlName="firstname" id="contactFirstName" placeholder="John">
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactLastName">Last Name
+      <span style="color: red">*</span>
+    </label>
+    <input type="text" pInputText class="form-control" formControlName="lastname" id="contactLastName" placeholder="Smith">
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactPhoneNo">Phone No.
+      <span style="color: red">*</span>
+    </label>
+    <input type="text" pInputText class="form-control" formControlName="phone" id="contactPhoneNo" placeholder="046987712">
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactCellNo">Cell No.
+      <span style="color: red">*</span>
+    </label>
+    <input type="text" pInputText class="form-control" formControlName="cell" id="contactCellNo" placeholder="0501126697">
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactEmail">Email Address
+      <span style="color: red">*</span>
+    </label>
+    <input type="text" pInputText class="form-control" formControlName="email" id="contactEmail" placeholder="john.smith@example.com">
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="nat">Nationality</label>
+    <br>
+    <p-autoComplete formControlName="nat" [suggestions]="filterednationalities" (completeMethod)="searchNationality($event)"
+      [dropdown]="true" forceSelection="true" field="countryName"></p-autoComplete>
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactPhotoUrl">Photo URL</label>
+    <input type="text" pInputText class="form-control" formControlName="photo" id="contactPhotoUrl" placeholder="http://" #contactPhotoUrl>
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6" *ngIf="contactPhotoUrl.value">
+    <img class="img-thumbnail" [src]="contactPhotoUrl.value" style="height: 66px;">
+  </div>
 
-      <div class="ui-g-12 ui-md-12 ui-sm-12"></div>
+  <div class="ui-g-12 ui-md-12 ui-sm-12"></div>
 
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="dob">Birth Date</label><br>
-        <p-calendar formControlName="dob"
-                    id="dob" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-6">
-        <label for="contactTitle">Gender</label><br>
-        <div class="ui-g-6 ui-md-6 ui-sm-6">
-          <p-radioButton name="gender" value="male" label="Male" formControlName="gender"></p-radioButton>
-        </div>
-        <div class="ui-g-6 ui-md-6 ui-sm-6">
-          <p-radioButton name="gender" value="female" label="Female" formControlName="gender"></p-radioButton>
-        </div>
-      </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="dob">Birth Date</label>
+    <br>
+    <p-calendar formControlName="dob" id="dob" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <label for="contactTitle">Gender</label>
+    <br>
+    <div class="ui-g-6 ui-md-6 ui-sm-6">
+      <p-radioButton name="gender" value="male" label="Male" formControlName="gender"></p-radioButton>
+    </div>
+    <div class="ui-g-6 ui-md-6 ui-sm-6">
+      <p-radioButton name="gender" value="female" label="Female" formControlName="gender"></p-radioButton>
+    </div>
+  </div>
 
-      <div formGroupName="location">
-        <div class="ui-g-12 ui-md-12 ui-sm-12">
-          <h5 class="text-muted">Address</h5>
-          <hr>
-        </div>
+  <div formGroupName="location">
+    <div class="ui-g-12 ui-md-12 ui-sm-12">
+      <h5 class="text-muted">Address</h5>
+      <hr>
+    </div>
 
-        <div class="ui-g-12 ui-md-6 ui-lg-6">
-          <label for="street">Street</label>
-          <input type="text" pInputText class="form-control" formControlName="street"
-                 id="street">
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-6">
-          <label for="city">City</label>
-          <input type="text" pInputText class="form-control" formControlName="city"
-                 id="city">
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-6">
-          <label for="state">State</label>
-          <input type="text" pInputText class="form-control" formControlName="state"
-                 id="state">
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-6">
-          <label for="postcode">Post Code</label>
-          <input type="text" pInputText class="form-control" formControlName="postcode"
-                 id="postcode">
-        </div>
-      </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-6">
+      <label for="street">Street</label>
+      <input type="text" pInputText class="form-control" formControlName="street" id="street">
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-6">
+      <label for="city">City</label>
+      <input type="text" pInputText class="form-control" formControlName="city" id="city">
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-6">
+      <label for="state">State</label>
+      <input type="text" pInputText class="form-control" formControlName="state" id="state">
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-6">
+      <label for="postcode">Post Code</label>
+      <input type="text" pInputText class="form-control" formControlName="postcode" id="postcode">
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12">
+    <p-panel header="Location Map" [toggleable]="true">
+      <iframe width="100%" height="450" frameborder="0" style="border:0" [src]="mapUrl | safe" allowfullscreen>
+      </iframe>
+    </p-panel>
+  </div>
 
 
-      <div class="ui-g-12 ui-md-12 ui-lg-12">
-        <button pButton type="submit" [disabled]="!contactEditForm.valid" label="Save"></button>
-        <button pButton class="ui-button-secondary" (click)="onCancel()" label="Cancel"></button>
-      </div>
+  <div class="ui-g-12 ui-md-12 ui-lg-12">
+    <button pButton type="submit" [disabled]="!contactEditForm.valid" label="Save"></button>
+    <button pButton class="ui-button-secondary" (click)="onCancel()" label="Cancel"></button>
+  </div>
 
-    </form>
-  <!--</div>-->
+</form>
+<!--</div>-->
 <!--</div>-->

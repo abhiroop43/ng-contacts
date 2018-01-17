@@ -16,4 +16,4 @@ A button that opens a "new contact" form - done
 
 Possibility to edit existing contacts - done
 
-Google map integration to select address
+Google map integration to select address - done
